@@ -1,0 +1,207 @@
+:root{
+  --bg: #F5F0E6;
+  --ink: #000000;
+  --paper: #FFFFFF;
+  --accent: #0EA5E9;
+  --radius: 16px;
+}
+
+*{ box-sizing: border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.wrap{
+  min-height:100%;
+  display:grid;
+  grid-template-rows: auto 1fr auto;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+}
+
+/* ---------- HERO ---------- */
+.hero{
+  text-align:center;
+  display:grid;
+  gap: .75rem;
+  justify-items:center;
+}
+
+/* Logo: micro tilt + scale + anillo de brillo */
+.logo{
+  width: 128px;
+  height: 128px;
+  border-radius: 24px;
+  box-shadow: 0 6px 30px rgba(0,0,0,.08);
+  object-fit: contain;
+  background: var(--paper);
+  padding: 10px;
+  transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease, filter .35s ease;
+  will-change: transform, box-shadow, filter;
+}
+.logo:hover{
+  transform: translateY(-2px) scale(1.04) rotate(1.8deg);
+  box-shadow:
+    0 8px 34px rgba(0,0,0,.10),
+    0 0 0 6px rgba(14,165,233,.10),
+    0 0 0 12px rgba(14,165,233,.06);
+  filter: saturate(1.05);
+}
+
+/* Título: tracking + peso + subrayado que barre */
+.title{
+  margin: .25rem 0 0;
+  font-size: clamp(1.8rem, 2.6vw + 1rem, 3rem);
+  letter-spacing: .02em;
+  line-height: 1.1;
+  display: inline-block;
+  background:
+    linear-gradient(0deg, rgba(14,165,233,.22), rgba(14,165,233,0)) bottom
+    / 0% 10px no-repeat;
+  transition: letter-spacing .25s ease, transform .25s ease, background-size .5s ease;
+}
+.title:hover{
+  transform: translateY(-1px);
+  letter-spacing: .04em;
+  background-size: 100% 10px; /* se llena de izq a der */
+}
+
+/* Eslogan: “pill highlight” + fade/slide */
+.tagline{
+  margin: 0;
+  color: #222;
+  opacity: .85;
+  font-size: clamp(.95rem, .4vw + .85rem, 1.125rem);
+  padding: .15rem .55rem;
+  border-radius: 999px;
+  transition: background-color .3s ease, box-shadow .3s ease, transform .25s ease, opacity .25s ease;
+}
+.tagline:hover{
+  background-color: rgba(14,165,233,.10);
+  box-shadow: 0 8px 24px rgba(14,165,233,.15) inset, 0 10px 24px rgba(14,165,233,.10);
+  transform: translateY(-1px);
+  opacity: 1;
+}
+
+/* ---------- EQUIPO ---------- */
+.team{
+  margin-top: 2rem;
+  background: var(--paper);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  box-shadow: 0 10px 40px rgba(0,0,0,.06);
+}
+
+.team-title{
+  margin: .25rem 0 1rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  opacity: .8;
+}
+
+.team-list{
+  --gap: .5rem;
+  display:grid;
+  gap: var(--gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Tarjetas */
+.member{
+  position: relative;
+  padding: .9rem 1rem;
+  border-radius: 12px;
+  background: #fff;
+  outline: none;
+  border: 1px solid rgba(0,0,0,.06);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  cursor: default;
+  display:flex;
+  flex-direction: column;
+  gap:.4rem;
+}
+
+.member .name{
+  font-weight: 600;
+  letter-spacing: .01em;
+  background: linear-gradient(0deg, rgba(14,165,233,.22), rgba(14,165,233,0)) bottom / 100% 0px no-repeat;
+  transition: background-size .25s ease, color .2s ease;
+}
+
+/* Chip matrícula: debajo del nombre, no se superpone */
+.matricula{
+  display:none; /* visible en hover/focus */
+  width: fit-content;
+  max-width: 100%;
+  padding: .42rem .62rem;
+  border-radius: 999px;
+  background: rgba(14,165,233,.10);
+  border: 1px solid rgba(14,165,233,.35);
+  color: #0a0a0a;
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 1;
+  box-shadow: 0 6px 16px rgba(14,165,233,.0);
+}
+
+.member:hover,
+.member:focus-visible{
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(14,165,233,.18);
+  border-color: rgba(14,165,233,.35);
+}
+.member:hover .name,
+.member:focus-visible .name{
+  color: var(--accent);
+  background-size: 100% 8px;
+}
+.member:hover .matricula,
+.member:focus-visible .matricula,
+.member:focus-within .matricula{
+  display:inline-block; /* empuja layout */
+  box-shadow: 0 6px 16px rgba(14,165,233,.14);
+}
+
+/* Variaciones del subrayado (misma paleta) */
+.v1:hover .name, .v1:focus-visible .name{ background-image: linear-gradient(0deg, rgba(14,165,233,.18), rgba(14,165,233,0)); }
+.v2:hover .name, .v2:focus-visible .name{ background-image: linear-gradient(0deg, rgba(14,165,233,.22), rgba(14,165,233,0)); }
+.v3:hover .name, .v3:focus-visible .name{ background-image: linear-gradient(0deg, rgba(14,165,233,.26), rgba(14,165,233,0)); }
+.v4:hover .name, .v4:focus-visible .name{ background-image: linear-gradient(0deg, rgba(14,165,233,.30), rgba(14,165,233,0)); }
+.v5:hover .name, .v5:focus-visible .name{ background-image: linear-gradient(0deg, rgba(14,165,233,.34), rgba(14,165,233,0)); }
+.v6:hover .name, .v6:focus-visible .name{ background-image: linear-gradient(0deg, rgba(14,165,233,.38), rgba(14,165,233,0)); }
+.v7:hover .name, .v7:focus-visible .name{ background-image: linear-gradient(0deg, rgba(14,165,233,.42), rgba(14,165,233,0)); }
+.v8:hover .name, .v8:focus-visible .name{ background-image: linear-gradient(0deg, rgba(14,165,233,.46), rgba(14,165,233,0)); }
+
+.footer{
+  margin-top: 1.5rem;
+  text-align: center;
+  opacity: .7;
+}
+
+/* Responsivo */
+@media (min-width: 700px){
+  .team-list{
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Respeta usuarios con “reducir movimiento” */
+@media (prefers-reduced-motion: reduce){
+  *{
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
